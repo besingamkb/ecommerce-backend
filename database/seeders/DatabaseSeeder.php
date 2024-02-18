@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +20,19 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
-        // ]);
+        // ])
+
+
+        $categories = Category::factory()->count(50)->create();
+        Store::factory()
+            ->count(20)
+            ->hasDetails(5)
+            ->create()
+            ->each(function ($store) use ($categories) {
+                Product::factory()->count(25)->sequence([
+                    'store_id' => $store->store_id,
+                    'category_id' => $categories->random()->category_id
+                ])->create();
+            });
     }
 }
