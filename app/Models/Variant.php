@@ -22,4 +22,9 @@ class Variant extends Model
     {
         return $this->morphMany(Detail::class, 'detailable');
     }
+
+    public function variantStocks()
+    {
+        return $this->hasMany(VariantStock::class, 'variant_id');
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\Variant;
+use App\Models\VariantStock;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,17 +27,22 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::factory()->count(50)->create();
         Store::factory()
-            ->count(20)
+            ->count(10)
             ->hasDetails(5)
             ->create()
             ->each(function ($store) use ($categories) {
-                Product::factory()->count(25)->sequence([
+                Product::factory()->count(20)->sequence([
                     'store_id' => $store->store_id,
                     'category_id' => $categories->random()->category_id
-                ])->create()->each(function ($product) {
+                ])->create()->each(function ($product) use ($store) {
                     Variant::factory()->count(5)->sequence([
                         'product_id' => $product->product_id
-                    ])->create();
+                    ])->create()->each(function ($variant) use ($store) {
+                        VariantStock::factory()->count(3)->sequence([
+                            'variant_id' => $variant->variant_id,
+                            'store_id' => $store->store_id,
+                        ])->create();
+                    });
                 });
             });
     }

@@ -22,4 +22,9 @@ class Store extends Model
     {
         return $this->hasMany(Product::class, 'store_id');
     }
+
+    public function variantStocks()
+    {
+        return $this->hasMany(VariantStock::class, 'store_id');
+    }
 }
