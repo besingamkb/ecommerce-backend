@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Detail>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Variant>
  */
-class DetailFactory extends Factory
+class VariantFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +18,8 @@ class DetailFactory extends Factory
     public function definition(): array
     {
         return [
-            'key' => $this->faker->words(2, true),
-            'value' => $this->faker->sentence,
+            'variant_name' => $this->faker->words(5, true),
+//            'product_id' => Product::factory()->create()->product_id
         ];
     }
 }

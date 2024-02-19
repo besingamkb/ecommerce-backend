@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\Variant;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,7 +33,11 @@ class DatabaseSeeder extends Seeder
                 Product::factory()->count(25)->sequence([
                     'store_id' => $store->store_id,
                     'category_id' => $categories->random()->category_id
-                ])->create();
+                ])->create()->each(function ($product) {
+                    Variant::factory()->count(5)->sequence([
+                        'product_id' => $product->product_id
+                    ])->create();
+                });
             });
     }
 }

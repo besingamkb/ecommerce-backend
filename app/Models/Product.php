@@ -21,4 +21,9 @@ class Product extends Model
     {
         return $this->belongsTo(Store::class, 'store_id');
     }
+
+    public function variants()
+    {
+        return $this->hasMany(Variant::class, 'product_id');
+    }
 }
