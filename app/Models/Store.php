@@ -27,4 +27,9 @@ class Store extends Model
     {
         return $this->hasMany(VariantStock::class, 'store_id');
     }
+
+    public function users()
+    {
+        return $this->hasMany(StoreUser::class, 'store_id');
+    }
 }

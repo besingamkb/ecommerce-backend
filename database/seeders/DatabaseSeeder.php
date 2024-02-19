@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\StoreUser;
 use App\Models\Variant;
 use App\Models\VariantStock;
 use Illuminate\Database\Seeder;
@@ -31,6 +32,9 @@ class DatabaseSeeder extends Seeder
             ->hasDetails(5)
             ->create()
             ->each(function ($store) use ($categories) {
+                StoreUser::factory()->count(10)->sequence([
+                    'store_id' => $store->store_id,
+                ])->create();
                 Product::factory()->count(20)->sequence([
                     'store_id' => $store->store_id,
                     'category_id' => $categories->random()->category_id
