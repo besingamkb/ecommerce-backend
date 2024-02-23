@@ -17,7 +17,7 @@ class StoreUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => $this->faker->unique()->userName(),
+            'name' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->email(),
             'password' => bcrypt('password'),
         ];
