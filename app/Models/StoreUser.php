@@ -13,6 +13,14 @@ class StoreUser extends Authenticatable
 {
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'store_user_id';
+    
+
     protected $fillable = [
         'name',
         'email',
